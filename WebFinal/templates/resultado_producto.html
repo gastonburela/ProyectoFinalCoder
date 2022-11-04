@@ -1,0 +1,15 @@
+{% extends 'inicio.html' %}
+
+{% load static %}
+
+{% block secciones %}
+
+    <p>El Producto buscado es: {{ modelo }}</p>
+    <h4>Modelo: {{producto.modelo}}<br/> Genero: {{producto.genero}}<br/> Medidas: {{producto.medidas}}<br/></h4>
+    
+    <button><a href="{% url 'busqueda_producto'  %}" >Volver a buscar</a><br></button>
+    <button><a href="{% url 'lista_productos'  %}" >Volver a Productos</a></button>
+
+
+
+{% endblock %}

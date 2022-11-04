@@ -95,6 +95,18 @@ class Borracliente(DeleteView):
         template_name = 'borrarcliente.html'
         success_url = '/WebFinal/lista_clientes'
 
+def busqueda_cliente(request):
+
+    return render(request, 'busqueda_cliente.html')
+
+def buscacliente(request):
+
+    apellidocliente = request.GET['apellido']
+    
+    cliente = Cliente.objects.get(apellido = apellidocliente)
+
+    return render(request, 'resultado_cliente.html', {'cliente': cliente, 'apellido': apellidocliente})
+
 # def editar_cliente(request, id):
 
 #     print('method:', request.method)
@@ -178,6 +190,19 @@ def empleado_actualizado(request):
 
     return render(request, 'exito_update_empleado.html')
 
+#BUSQUEDA
+def busqueda_empleado(request):
+
+    return render(request, 'busqueda_empleado.html')
+
+def buscarempleado(request):
+
+    apellidoempleado = request.GET['apellido']
+    
+    empleado = Empleado.objects.get(apellido = apellidoempleado)
+
+    return render(request, 'resultado_empleado.html', {'empleado': empleado, 'apellido': apellidoempleado})
+
 # PRODUCTOS
 
 class CrearProducto(CreateView):
@@ -221,6 +246,18 @@ def producto_actualizado(request):
 
     return render(request, 'exito_update_producto.html')
 
+#BUSQUEDA
+def busqueda_producto(request):
+
+    return render(request, 'busqueda_producto.html')
+
+def buscarproducto(request):
+
+    modeloproducto = request.GET['modelo']
+    
+    producto = Productos.objects.get(modelo = modeloproducto)
+
+    return render(request, 'resultado_producto.html', {'producto': producto, 'modelo': modeloproducto})
 # def form_productos(request):
 #     #cuerpo 
 
@@ -268,6 +305,20 @@ class EditarProveedor(UpdateView):
 def proveedor_actualizado(request):
 
     return render(request, 'exito_update_proveedor.html')
+
+
+#BUSQUEDA
+def busqueda_proveedor(request):
+
+    return render(request, 'busqueda_proveedor.html')
+
+def buscarproveedor(request):
+
+    nombreproveedor = request.GET['nombre']
+    
+    proveedor = Proveedores.objects.get(nombre = nombreproveedor)
+
+    return render(request, 'resultado_proveedor.html', {'proveedor': proveedor, 'nombre': nombreproveedor})
 
 # def form_proveedores(request):
 #    #cuerpo 

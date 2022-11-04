@@ -1,0 +1,17 @@
+{% extends 'inicio.html' %}
+
+{% load static %}
+
+{% block secciones %}
+
+<form action="{% url 'buscarcliente' %}" method="GET">{% csrf_token %}
+
+    <p>Ingrese apellido del Cliente <input type="text" name="apellido"/> </p>
+
+    <input type="submit" value="Buscar Cliente">
+
+
+
+</form>
+
+{% endblock %}
