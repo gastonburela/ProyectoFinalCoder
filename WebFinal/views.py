@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.test import Client
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
@@ -94,19 +94,21 @@ class Borracliente(DeleteView):
         model = Cliente
         template_name = 'borrarcliente.html'
         success_url = '/WebFinal/lista_clientes'
-
+#BUSQUEDA
 def busqueda_cliente(request):
 
     return render(request, 'busqueda_cliente.html')
 
 def buscacliente(request):
 
-    apellidocliente = request.GET['apellido']
+    dnicliente = request.GET['dni']
     
-    cliente = Cliente.objects.get(apellido = apellidocliente)
-
-    return render(request, 'resultado_cliente.html', {'cliente': cliente, 'apellido': apellidocliente})
-
+    cliente = Cliente.objects.get(dni = dnicliente)
+    if dnicliente:
+        
+        return render(request, 'resultado_cliente.html', {'cliente': cliente, 'dni': dnicliente})
+    else:
+        return HttpResponse('No se encontro el cliente')
 # def editar_cliente(request, id):
 
 #     print('method:', request.method)

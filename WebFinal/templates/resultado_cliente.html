@@ -4,8 +4,27 @@
 
 {% block secciones %}
 
-    <p>El cliente buscado es: {{ apellido }}</p>
-    <h4>Nombre: {{cliente.nombre}}<br/> Apellido: {{ cliente.apellido}}<br/> DNI: {{cliente.dni}}<br/> Telefono: {{cliente.telefono}}<br/> Dirección: {{cliente.direccion}}</h4>
+    <p>El cliente buscado es: {{ dni }}</p>
+
+    {% if dni %}
+
+    <ul>
+
+       
+            <li>
+                <h4>Nombre: {{cliente.nombre}}<br/> Apellido: {{ cliente.apellido}}<br/> DNI: {{cliente.dni}}<br/> Telefono: {{cliente.telefono}}<br/> Dirección: {{cliente.direccion}}</h4>
+            </li>
+        
+            
+    </ul>
+
+{% else %}
+
+    <p>No hubo coincidencias!</p>
+    
+{% endif %}
+
+    
     
     <button><a href="{% url 'busqueda_cliente'  %}" >Volver a buscar</a><br></button>
     <button><a href="{% url 'lista_clientes'  %}" >Volver a clientes</a></button>
