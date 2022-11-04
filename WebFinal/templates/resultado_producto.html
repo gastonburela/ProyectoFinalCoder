@@ -1,12 +1,25 @@
-{% extends 'inicio.html' %}
+
 
 {% load static %}
 
 {% block secciones %}
 
-    <p>El Producto buscado es: {{ modelo }}</p>
-    <h4>Modelo: {{producto.modelo}}<br/> Genero: {{producto.genero}}<br/> Medidas: {{producto.medidas}}<br/></h4>
-    
+    {% if object_list %}
+
+        {% for producto in object_list %}
+        <ul>
+       
+            <li>   
+            <h4>Modelo: {{producto.modelo}}<br/> Genero: {{producto.genero}}<br/> Medidas: {{producto.medidas}}<br/></h4>
+            </ul>
+        {% endfor %}    
+        </li>
+
+    {% else %}
+        <h4>Producto no encontrado</h4>
+    {% endif %}
+
+
     <button><a href="{% url 'busqueda_producto'  %}" >Volver a buscar</a><br></button>
     <button><a href="{% url 'lista_productos'  %}" >Volver a Productos</a></button>
 

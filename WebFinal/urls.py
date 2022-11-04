@@ -16,7 +16,7 @@ urlpatterns = [
     path('detalle_cliente/<pk>', Detalle_cliente.as_view(), name='detalle_cliente'),
     path('clienteupdate/<pk>', EditarCliente.as_view(), name='clienteupdate'),
     path('busqueda_cliente/', busqueda_cliente, name='busqueda_cliente'),
-    path('buscarcliente/', buscacliente, name='buscarcliente'),
+    path('buscarcliente/', BuscaCliente.as_view(), name='buscarcliente'),
 
     path('crear_empleado/', Empleados.as_view(), name='crea_empleado'),
     path('exito_empleado/',empleado_creado,name='exito_empleado'),
@@ -26,7 +26,7 @@ urlpatterns = [
     path('empleadoupdate/<pk>', EditarEmpleado.as_view(), name='empleadoupdate'),
     path('exito_update_empleado/', empleado_actualizado, name='empleadoactualizado'),
     path('busqueda_empleado/', busqueda_empleado, name='busqueda_empleado'),
-    path('buscarempleado/', buscarempleado, name='buscarempleado'),
+    path('buscarempleado/', BuscarEmpleado.as_view(), name='buscarempleado'),
     
     path('crear_producto/', CrearProducto.as_view(), name='crear_producto'),  
     path('exito_producto/', productocreado, name='productocreado'),
@@ -36,7 +36,7 @@ urlpatterns = [
     path('productoupdate/<pk>', EditarProducto.as_view(), name='productoupdate'),
     path('exito_update_producto/', producto_actualizado, name='productoactualizado'),
     path('busqueda_producto/', busqueda_producto, name='busqueda_producto'),
-    path('buscarproducto/', buscarproducto, name='buscarproducto'),
+    path('buscarproducto/', BuscarProducto.as_view(), name='buscarproducto'),
     
     path('crear_proveedor/', CrearProveedor.as_view(), name='crear_proveedor'), 
     path('exito_proveedor/', proveedorcreado, name='proveedorcreado'),
@@ -46,7 +46,7 @@ urlpatterns = [
     path('proveedorupdate/<pk>', EditarProveedor.as_view(), name='proveedorupdate'),
     path('exito_update_proveedor/', proveedor_actualizado, name='proveedoractualizado'),
     path('busqueda_proveedor/', busqueda_proveedor, name='busqueda_proveedor'),
-    path('buscarproveedor/', buscarproveedor, name='buscarproveedor'),
+    path('buscarproveedor/', BuscarProveedor.as_view(), name='buscarproveedor'),
 
 
 ]

@@ -5,6 +5,14 @@ from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView, UpdateView, CreateView
 
+from django.db.models import Q
+from collections import namedtuple
+
+from django.core.exceptions import FieldError
+from django.db import DEFAULT_DB_ALIAS, DatabaseError
+from django.db.models.constants import LOOKUP_SEP
+
+from django.utils import tree
 from WebFinal.forms import Formulario_cliente
 from WebFinal.models import *
 from WebFinal.forms import *
@@ -96,19 +104,22 @@ class Borracliente(DeleteView):
         success_url = '/WebFinal/lista_clientes'
 #BUSQUEDA
 def busqueda_cliente(request):
-
+    
     return render(request, 'busqueda_cliente.html')
 
-def buscacliente(request):
+class BuscaCliente(ListView):
+    model = Cliente
+    template_name = "busqueda_cliente.html"
 
-    dnicliente = request.GET['dni']
-    
-    cliente = Cliente.objects.get(dni = dnicliente)
-    if dnicliente:
+    def get_queryset(self):  # new
+        query = self.request.GET.get("dni")
+        if query=="":
+            response = 'Cliente no encontrado'
+            HttpResponseRedirect('/WebFinal/', {'response':response})
+        else:    
+            object_list = Cliente.objects.filter(Q(dni__icontains=query))       
+            return (object_list)
         
-        return render(request, 'resultado_cliente.html', {'cliente': cliente, 'dni': dnicliente})
-    else:
-        return HttpResponse('No se encontro el cliente')
 # def editar_cliente(request, id):
 
 #     print('method:', request.method)
@@ -194,17 +205,21 @@ def empleado_actualizado(request):
 
 #BUSQUEDA
 def busqueda_empleado(request):
-
+    
     return render(request, 'busqueda_empleado.html')
 
-def buscarempleado(request):
+class BuscarEmpleado(ListView):
+    model = Empleado
+    template_name = "busqueda_empleado.html"
 
-    apellidoempleado = request.GET['apellido']
-    
-    empleado = Empleado.objects.get(apellido = apellidoempleado)
-
-    return render(request, 'resultado_empleado.html', {'empleado': empleado, 'apellido': apellidoempleado})
-
+    def get_queryset(self):  # new
+        query = self.request.GET.get("apellido")
+        if query=="":
+            response = 'Empleado no encontrado'
+            HttpResponseRedirect('/WebFinal/', {'response':response})
+        else:    
+            object_list = Empleado.objects.filter(Q(apellido__icontains=query))       
+            return (object_list)
 # PRODUCTOS
 
 class CrearProducto(CreateView):
@@ -250,16 +265,21 @@ def producto_actualizado(request):
 
 #BUSQUEDA
 def busqueda_producto(request):
-
+    
     return render(request, 'busqueda_producto.html')
 
-def buscarproducto(request):
+class BuscarProducto(ListView):
+    model = Productos
+    template_name = "busqueda_producto.html"
 
-    modeloproducto = request.GET['modelo']
-    
-    producto = Productos.objects.get(modelo = modeloproducto)
-
-    return render(request, 'resultado_producto.html', {'producto': producto, 'modelo': modeloproducto})
+    def get_queryset(self):  # new
+        query = self.request.GET.get("modelo")
+        if query=="":
+            response = 'Producto no encontrado'
+            HttpResponseRedirect('/WebFinal/', {'response':response})
+        else:    
+            object_list = Productos.objects.filter(Q(modelo__icontains=query))       
+            return (object_list)
 # def form_productos(request):
 #     #cuerpo 
 
@@ -311,16 +331,21 @@ def proveedor_actualizado(request):
 
 #BUSQUEDA
 def busqueda_proveedor(request):
-
+    
     return render(request, 'busqueda_proveedor.html')
 
-def buscarproveedor(request):
+class BuscarProveedor(ListView):
+    model = Proveedores
+    template_name = "busqueda_proveedor.html"
 
-    nombreproveedor = request.GET['nombre']
-    
-    proveedor = Proveedores.objects.get(nombre = nombreproveedor)
-
-    return render(request, 'resultado_proveedor.html', {'proveedor': proveedor, 'nombre': nombreproveedor})
+    def get_queryset(self):  # new
+        query = self.request.GET.get("nombre")
+        if query=="":
+            response = 'Proveedor no encontrado'
+            HttpResponseRedirect('/WebFinal/', {'response':response})
+        else:    
+            object_list = Proveedores.objects.filter(Q(nombre__icontains=query))       
+            return (object_list)
 
 # def form_proveedores(request):
 #    #cuerpo 
