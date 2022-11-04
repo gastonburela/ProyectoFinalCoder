@@ -1,0 +1,37 @@
+{% extends 'inicio.html' %}
+
+{% load static %}
+
+{% block secciones %}
+
+<button>
+<a href="{% url 'crear_producto' %}" >Dar de Alta Nuevo Producto</a>
+</button>
+    <h1> 
+        
+        Productos Disponibles: </h1>
+
+    <ul>
+
+        {% for producto in productos %}
+        <li>
+            <a href="{% url 'detalle_producto' producto.id %}">
+
+            {{producto}}
+
+            </a>
+        </li>
+        <div>
+            <button>
+                <a href="{% url 'borraproducto' producto.id %}">Eliminar</a>
+            </button>
+            <button>
+                <a href="{% url 'productoupdate' producto.id %}">Modificar</a>
+            </button>
+        </div>
+
+        {% endfor %}
+
+    </ul>
+
+{% endblock %}
