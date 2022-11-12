@@ -4,6 +4,8 @@ from django.test import Client
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView, UpdateView, CreateView
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate, login, logout
 
 from django.db.models import Q
 from collections import namedtuple
@@ -214,9 +216,10 @@ class BuscarEmpleado(ListView):
 
     def get_queryset(self):  # new
         query = self.request.GET.get("apellido")
-        if query=="":
+        
+        if query=='':
             response = 'Empleado no encontrado'
-            HttpResponseRedirect('/WebFinal/', {'response':response})
+            HttpResponseRedirect('/WebFinal/resultado_empleado/', {'response':response})
         else:    
             object_list = Empleado.objects.filter(Q(apellido__icontains=query))       
             return (object_list)
@@ -352,3 +355,33 @@ class BuscarProveedor(ListView):
 
 #     return render(request, 'form_proveedores')
 
+def login(request):
+
+    if request.method=='POST':
+
+        formulario = AuthenticationForm(request, data=request.POST)
+
+        if formulario.is_valid():
+
+            datos = formulario.cleaned_data
+
+            usuario = datos['username']
+            psw = datos['password']
+
+            user = authenticate(username=usuario, password=psw)
+
+            if user:
+
+                login(request, user)
+
+                return render(request, 'inicio2.html', {'mensaje': f'Bienvenido {user}'})
+            
+            else:
+
+                return render(request, 'inicio2,html', {'mensaje': f'Usuario o contraseña incorrectos.'})
+
+        else:
+
+            return render(request, 'inicio2,html', {'mensaje': f'Formulario inválido.'})
+
+        

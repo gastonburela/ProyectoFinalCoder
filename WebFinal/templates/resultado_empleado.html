@@ -9,7 +9,7 @@
         {% for empleado in object_list %} 
 
             <ul>
-                <li>
+                <br/><li>
                 <h4>Nombre: {{empleado.nombre}}<br/> Apellido: {{empleado.apellido}}<br/> Area: {{empleado.area}}<br/> Cargo: {{empleado.cargo}}<br/></h4>
                 </li>
         {% endfor %} 
@@ -17,7 +17,7 @@
             </ul>
 
     {% else %} 
-        <h4>Empleado no encontrado</h4>
+        <h4>{{response}}</h4>
 
     {% endif %}
 
