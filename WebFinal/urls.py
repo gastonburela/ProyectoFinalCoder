@@ -48,5 +48,9 @@ urlpatterns = [
     path('busqueda_proveedor/', busqueda_proveedor, name='busqueda_proveedor'),
     path('buscarproveedor/', BuscarProveedor.as_view(), name='buscarproveedor'),
 
+    path('login/', userlogin, name='Login'),
+    path('registro/', registrar_user, name='Registro'),
+    path('logout/', LogoutView.as_view(template_name='logout.html'), name='Logout'),
+
 
 ]

@@ -4,9 +4,12 @@ from django.test import Client
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView, UpdateView, CreateView
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import authenticate, login, logout
-
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.views import LogoutView
+from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from collections import namedtuple
 
@@ -355,7 +358,7 @@ class BuscarProveedor(ListView):
 
 #     return render(request, 'form_proveedores')
 
-def login(request):
+def userlogin(request):
 
     if request.method=='POST':
 
@@ -378,10 +381,37 @@ def login(request):
             
             else:
 
-                return render(request, 'inicio2,html', {'mensaje': f'Usuario o contraseña incorrectos.'})
+                return render(request, 'inicio2.html', {'mensaje': f'Usuario o contraseña incorrectos.'})
 
         else:
 
-            return render(request, 'inicio2,html', {'mensaje': f'Formulario inválido.'})
+            return render(request, 'inicio2.html', {'mensaje': f'Datos Incorrectos.'})
 
+    else:
+
+        formulario = AuthenticationForm()
+
+        return render(request, 'login.html', {'formulario': formulario})
+    
+def registrar_user(request):
+
+    if request.method == 'POST':
         
+        formulario = UserCreationForm(request.POST)
+
+        if formulario.is_valid():
+
+            username = formulario.cleaned_data['username']
+            formulario.save()
+            return render(request, 'inicio2.html', {'mensaje': f'Usuario "{username}" creado correctamente.'})
+        
+        else:
+            return render(request, 'inicio2.html', {'mensaje': f'Error al crear Usuario. Por favor verifique los datos ingresados.'})
+    
+    else:
+
+        formulario = UserCreationForm()
+
+        return render(request, 'registro_usuario.html', {'formulario': formulario})
+
+
