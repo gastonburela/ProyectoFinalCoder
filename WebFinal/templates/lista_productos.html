@@ -4,16 +4,17 @@
 
 {% block secciones %}
 
+{% if user.is_authenticated %}
 <button>
 <a href="{% url 'crear_producto' %}" >Dar de Alta Nuevo Producto</a>
 </button>
 <button>
     <a href="{% url 'busqueda_producto' %}" >Buscar Producto</a>
     </button>
-
+{% endif %}
     <h1> 
         
-        Productos Disponibles: </h1>
+    <center>Este es nuestro catálogo de productos. Elegí el tuyo!!</center></h1></br>
 
     <ul>
 
@@ -26,12 +27,14 @@
             </a>
         </li>
         <div>
+            {% if user.is_authenticated %}
             <button>
                 <a href="{% url 'borraproducto' producto.id %}">Eliminar</a>
             </button>
             <button>
                 <a href="{% url 'productoupdate' producto.id %}">Modificar</a>
             </button>
+            {% endif %}
         </div>
 
         {% endfor %}

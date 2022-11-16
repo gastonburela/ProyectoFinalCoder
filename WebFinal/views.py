@@ -48,7 +48,7 @@ def inicio(request):
 #     return render(request, 'form_cliente.html', {'add_cliente': add_cliente})
 
 
-class CrearCliente(CreateView):
+class CrearCliente(LoginRequiredMixin, CreateView):
 
     model = Cliente
     form_class = Formulario_cliente
@@ -67,7 +67,7 @@ def creado_con_exito(request):
 
     return render(request,'crear_exito.html')
 
-class Mostrar_clientes(ListView):
+class Mostrar_clientes(LoginRequiredMixin, ListView):
 
     model = Cliente
     template_name = "lista_clientes.html"
@@ -85,13 +85,13 @@ class Mostrar_clientes(ListView):
 
 #         return render(request, "lista_clientes.html", {"clientes": clientes})  
 
-class Detalle_cliente(DetailView):
+class Detalle_cliente(LoginRequiredMixin, DetailView):
 
     model = Cliente
     template_name = "detalle_cliente.html"
     context_object_name = "cliente"
 
-class EditarCliente(UpdateView):
+class EditarCliente(LoginRequiredMixin, UpdateView):
 
     model = Cliente
     template_name = "cliente_update.html"
@@ -102,7 +102,7 @@ def cliente_actualizado(request):
 
     return render(request,'exito_update.html')
 
-class Borracliente(DeleteView):
+class Borracliente(LoginRequiredMixin, DeleteView):
 
         model = Cliente
         template_name = 'borrarcliente.html'
@@ -112,7 +112,7 @@ def busqueda_cliente(request):
     
     return render(request, 'busqueda_cliente.html')
 
-class BuscaCliente(ListView):
+class BuscaCliente(LoginRequiredMixin, ListView):
     model = Cliente
     template_name = "busqueda_cliente.html"
 
@@ -165,7 +165,7 @@ class BuscaCliente(ListView):
 #     #cuerpo 
 #     return render(request, 'form_empleado')
 
-class Empleados(CreateView):
+class Empleados(LoginRequiredMixin, CreateView):
 
     model = Empleado
     form_class = Formulario_empleado
@@ -178,26 +178,26 @@ def empleado_creado(request):
 
     return render(request, 'exito_empleado.html')
 
-class MostrarEmpleados(ListView):
+class MostrarEmpleados(LoginRequiredMixin, ListView):
 
     model = Empleado
     form_class = Formulario_empleado
     template_name = 'lista_empleados.html'
     context_object_name = "empleados"
 
-class Detalle_Empleado(DetailView):
+class Detalle_Empleado(LoginRequiredMixin, DetailView):
 
     model = Empleado
     template_name = "detalle_empleado.html"
     context_object_name = "empleado"
 
-class BorraEmpleado(DeleteView):
+class BorraEmpleado(LoginRequiredMixin, DeleteView):
 
         model = Empleado
         template_name = 'borrarempleado.html'
         success_url = '/WebFinal/lista_empleados'
 
-class EditarEmpleado(UpdateView):
+class EditarEmpleado(LoginRequiredMixin, UpdateView):
 
     model = Empleado
     template_name = "empleado_update.html"
@@ -213,7 +213,7 @@ def busqueda_empleado(request):
     
     return render(request, 'busqueda_empleado.html')
 
-class BuscarEmpleado(ListView):
+class BuscarEmpleado(LoginRequiredMixin, ListView):
     model = Empleado
     template_name = "busqueda_empleado.html"
 
@@ -228,7 +228,7 @@ class BuscarEmpleado(ListView):
             return (object_list)
 # PRODUCTOS
 
-class CrearProducto(CreateView):
+class CrearProducto(LoginRequiredMixin, CreateView):
 
     model = Productos
     form_class = Formulario_productos
@@ -252,13 +252,13 @@ class Detalle_Producto(DetailView):
     template_name = "detalle_producto.html"
     context_object_name = "producto"
 
-class BorraProducto(DeleteView):
+class BorraProducto(LoginRequiredMixin, DeleteView):
 
         model = Productos
         template_name = 'borrarproducto.html'
         success_url = '/WebFinal/lista_productos'
 
-class EditarProducto(UpdateView):
+class EditarProducto(LoginRequiredMixin, UpdateView):
 
     model = Productos
     template_name = "producto_update.html"
@@ -293,7 +293,7 @@ class BuscarProducto(ListView):
 
 # PROVEEDORES
 
-class CrearProveedor(CreateView):
+class CrearProveedor(LoginRequiredMixin, CreateView):
 
     model = Proveedores
     form_class = Formulario_proveedores
@@ -304,26 +304,26 @@ def proveedorcreado(request):
 
     return render(request, 'exito_proveedor.html')
 
-class ListaProveedores(ListView):
+class ListaProveedores(LoginRequiredMixin, ListView):
 
     model = Proveedores
     form_class = Formulario_proveedores
     template_name = 'lista_proveedores.html'
     context_object_name = "proveedores"
 
-class Detalle_Proveedor(DetailView):
+class Detalle_Proveedor(LoginRequiredMixin, DetailView):
 
     model = Proveedores
     template_name = "detalle_proveedor.html"
     context_object_name = "proveedor"
 
-class BorraProveedor(DeleteView):
+class BorraProveedor(LoginRequiredMixin, DeleteView):
 
         model = Proveedores
         template_name = 'borrarproveedor.html'
         success_url = '/WebFinal/lista_proveedores'
 
-class EditarProveedor(UpdateView):
+class EditarProveedor(LoginRequiredMixin, UpdateView):
 
     model = Proveedores
     template_name = "proveedor_update.html"
@@ -340,7 +340,7 @@ def busqueda_proveedor(request):
     
     return render(request, 'busqueda_proveedor.html')
 
-class BuscarProveedor(ListView):
+class BuscarProveedor(LoginRequiredMixin, ListView):
     model = Proveedores
     template_name = "busqueda_proveedor.html"
 

@@ -35,4 +35,4 @@ class Productos(models.Model):
     genero = models.CharField(max_length=30)
     medidas = models.CharField(max_length=30)
     def __str__(self):
-        return f'Modelo: {self.modelo} Genero: {self.genero} Medidas: {self.medidas}'
+        return f'Modelo: {self.modelo}'
