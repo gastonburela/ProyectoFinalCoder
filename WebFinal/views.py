@@ -9,7 +9,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.db.models import Q
 from collections import namedtuple
 
@@ -46,6 +46,26 @@ def inicio(request):
 #         add_cliente = Formulario_cliente()
 
 #     return render(request, 'form_cliente.html', {'add_cliente': add_cliente})
+
+
+
+# POSIBLE CLASE PARA EL MIXIN DE STAFF MEMBER.
+# class StaffRequiredMixin(object):
+#     """
+#     View mixin which requires that the authenticated user is a staff member
+#     (i.e. `is_staff` is True).
+#     """
+
+#     @method_decorator(login_required)
+#     def dispatch(self, request, *args, **kwargs):
+#         if not request.user.is_staff:
+#             messages.error(
+#                 request,
+#                 'You do not have the permission required to perform the '
+#                 'requested operation.')
+#             return redirect(settings.LOGIN_URL)
+#         return super(StaffRequiredMixin, self).dispatch(request,
+#             *args, **kwargs)
 
 
 class CrearCliente(LoginRequiredMixin, CreateView):
@@ -164,6 +184,7 @@ class BuscaCliente(LoginRequiredMixin, ListView):
 # def form_empleado(request):
 #     #cuerpo 
 #     return render(request, 'form_empleado')
+
 
 class Empleados(LoginRequiredMixin, CreateView):
 
