@@ -1,15 +1,19 @@
 from django.db import models
 from unittest.util import _MAX_LENGTH
 
+
 # Create your models here.  
+
 class Cliente(models.Model):
     nombre = models.CharField(max_length=30)
     apellido = models.CharField(max_length=30)
     dni = models.CharField(max_length=10)
     telefono = models.CharField(max_length=30)
     direccion = models.CharField(max_length=60)
+
     def __str__(self):
         return f'{self.nombre} {self.apellido}'
+
 
 class Empleado(models.Model):
     legajo = models.IntegerField()
@@ -34,5 +38,13 @@ class Productos(models.Model):
     modelo = models.CharField(max_length=30)
     genero = models.CharField(max_length=30)
     medidas = models.CharField(max_length=30)
+    
     def __str__(self):
         return f'Modelo: {self.modelo}'
+
+class Carrito(models.Model):
+
+    cliente = models.ForeignKey(Cliente,null=True,blank=True, on_delete=models.CASCADE)
+    venta = models.ManyToManyField(Productos)
+    fecha = models.DateField(auto_now=True)
+    detalle = models.TextField(max_length=254)
