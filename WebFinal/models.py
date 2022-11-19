@@ -42,7 +42,7 @@ class Productos(models.Model):
     def __str__(self):
         return f'Modelo: {self.modelo}'
 
-class Carrito(models.Model):
+class Ventas(models.Model):
 
     cliente = models.ForeignKey(Cliente,null=True,blank=True, on_delete=models.CASCADE)
     venta = models.ManyToManyField(Productos)

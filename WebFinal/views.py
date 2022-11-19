@@ -12,6 +12,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.db.models import Q
 from collections import namedtuple
+from django.utils.decorators import method_decorator
 
 from django.core.exceptions import FieldError
 from django.db import DEFAULT_DB_ALIAS, DatabaseError
@@ -22,6 +23,11 @@ from WebFinal.forms import Formulario_cliente
 from WebFinal.models import *
 from WebFinal.forms import *
 # Create your views here.
+
+class StaffRequiredMixin(object):
+    @method_decorator(staff_member_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(StaffRequiredMixin, self).dispatch(request, *args, **kwargs)
 
 def inicio(request):
 
@@ -140,7 +146,7 @@ class BuscaCliente(LoginRequiredMixin, ListView):
         query = self.request.GET.get("dni")
         if query=="":
             response = 'Cliente no encontrado'
-            HttpResponseRedirect('/WebFinal/', {'response':response})
+            HttpResponseRedirect('/WebFinal/inicio2', {'response':response})
         else:    
             object_list = Cliente.objects.filter(Q(dni__icontains=query))       
             return (object_list)
@@ -186,7 +192,7 @@ class BuscaCliente(LoginRequiredMixin, ListView):
 #     return render(request, 'form_empleado')
 
 
-class Empleados(LoginRequiredMixin, CreateView):
+class Empleados(StaffRequiredMixin, CreateView):
 
     model = Empleado
     form_class = Formulario_empleado
@@ -199,26 +205,26 @@ def empleado_creado(request):
 
     return render(request, 'exito_empleado.html')
 
-class MostrarEmpleados(LoginRequiredMixin, ListView):
+class MostrarEmpleados(StaffRequiredMixin, ListView):
 
     model = Empleado
     form_class = Formulario_empleado
     template_name = 'lista_empleados.html'
     context_object_name = "empleados"
 
-class Detalle_Empleado(LoginRequiredMixin, DetailView):
+class Detalle_Empleado(StaffRequiredMixin, DetailView):
 
     model = Empleado
     template_name = "detalle_empleado.html"
     context_object_name = "empleado"
 
-class BorraEmpleado(LoginRequiredMixin, DeleteView):
+class BorraEmpleado(StaffRequiredMixin, DeleteView):
 
         model = Empleado
         template_name = 'borrarempleado.html'
         success_url = '/WebFinal/lista_empleados'
 
-class EditarEmpleado(LoginRequiredMixin, UpdateView):
+class EditarEmpleado(StaffRequiredMixin, UpdateView):
 
     model = Empleado
     template_name = "empleado_update.html"
@@ -234,7 +240,7 @@ def busqueda_empleado(request):
     
     return render(request, 'busqueda_empleado.html')
 
-class BuscarEmpleado(LoginRequiredMixin, ListView):
+class BuscarEmpleado(StaffRequiredMixin, ListView):
     model = Empleado
     template_name = "busqueda_empleado.html"
 
@@ -435,4 +441,32 @@ def registrar_user(request):
 
         return render(request, 'registro_usuario.html', {'formulario': formulario})
 
+def registro_ventas(request):
+
+    return render(request, 'registrar_venta.html')
+
+def exitoventas(request):
+
+    return render(request, 'exito_venta.html')
+
+class Ingreso_venta(LoginRequiredMixin, CreateView):
+
+    model = Ventas
+    form_class = Formulario_ventas
+    fields = ('venta','detalle')
+    template_name = 'ingreso_venta.html'
+    success_url = '/WebFinal/exito_venta/'
+
+class BuscaClienteVenta(LoginRequiredMixin, ListView):
+    model = Cliente
+    template_name = "registrar_venta.html"
+
+    def get_queryset(self):  # new
+        query = self.request.GET.get("dni")
+        if query=="":
+            response = 'Cliente no encontrado'
+            HttpResponseRedirect('/WebFinal/inicio2', {'response':response})
+        else:    
+            object_list = Cliente.objects.filter(Q(dni__icontains=query))       
+            return (object_list)
 

@@ -52,5 +52,10 @@ urlpatterns = [
     path('registro/', registrar_user, name='Registro'),
     path('logout/', LogoutView.as_view(template_name='logout.html'), name='Logout'),
 
+    path('registro_ventas/', registro_ventas, name='registroventas'),
+    path('ingreso_venta/', Ingreso_venta.as_view(), name='ingresoventa'),
+    path('ingreso_venta/', BuscaClienteVenta.as_view(), name='buscarclienteventa'),
+    path('exito_venta/', exitoventas, name='exitoventa'),
+
 
 ]

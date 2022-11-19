@@ -1,0 +1,17 @@
+{% extends 'inicio.html' %}
+
+{% load static %}
+
+{% block secciones %}
+
+<form action="{% url 'buscarclienteventa' %}" method="GET">{% csrf_token %}
+
+    <p>Ingrese DNI del Cliente <input type="text" name="dni"/> </p>
+
+    <input type="submit" value="Buscar Cliente para venta">
+
+    {% include 'ingreso_venta.html' %}
+
+</form>
+
+{% endblock %}

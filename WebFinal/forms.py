@@ -30,7 +30,7 @@ class Formulario_proveedores(forms.ModelForm):
 
     class Meta:
         model = Proveedores
-        fields = ("nombre","tipo","telefono","direccion")
+        fields = ("numero","nombre","tipo","telefono","direccion")
 
 class Formulario_productos(forms.ModelForm):
     # modelo = forms.CharField(max_length=30)
@@ -40,3 +40,8 @@ class Formulario_productos(forms.ModelForm):
         model = Productos
         fields = ("modelo","genero","medidas")
 
+class Formulario_ventas(forms.ModelForm):
+
+    class Meta:
+        model = Ventas
+        fields = ("cliente","venta","detalle")
