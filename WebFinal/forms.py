@@ -44,4 +44,4 @@ class Formulario_ventas(forms.ModelForm):
 
     class Meta:
         model = Ventas
-        fields = ("cliente","venta","detalle")
+        fields = ("venta","detalle")

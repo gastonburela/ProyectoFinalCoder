@@ -1,15 +1,29 @@
-{% extends 'inicio.html' %}
+
 
 {% load static %}
 
 {% block secciones %}
 
-<form action="{% url 'ingresoventa' %}" method="POST">{% csrf_token %}
 
-    {{form.as_p}}
+    {% if object_list %}
 
-    <input type="submit" value='Cargar Venta'/>  
+       {% for cliente in object_list %}
+            
+            <h4>Registrar nueva venta para cliente: {{cliente.nombre}}</h4>
 
-</form>
+           <a href="{% url 'nuevaventa' cliente.pk %}">Nueva venta</a>
+        {% endfor %}
+      
+    {% else %}
+    
+        <h4>Cliente no encontrado</h4>
+    
+    {% endif %}
+    
+    
+    <button><a href="{% url 'busqueda_cliente'  %}" >Volver a buscar</a><br></button>
+    <button><a href="{% url 'lista_clientes'  %}" >Volver a clientes</a></button>
+
+
 
 {% endblock %}

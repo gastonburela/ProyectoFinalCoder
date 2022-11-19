@@ -4,7 +4,7 @@
 
 {% block secciones %}
 
-<form action="{% url 'buscarclienteventa' %}" method="GET">{% csrf_token %}
+<form action="{% url 'buscarclienteventa'  %}" method="GET">{% csrf_token %}
 
     <p>Ingrese DNI del Cliente <input type="text" name="dni"/> </p>
 

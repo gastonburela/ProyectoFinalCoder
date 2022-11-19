@@ -449,13 +449,12 @@ def exitoventas(request):
 
     return render(request, 'exito_venta.html')
 
-class Ingreso_venta(LoginRequiredMixin, CreateView):
+# class Ingreso_venta(LoginRequiredMixin, CreateView):
 
-    model = Ventas
-    form_class = Formulario_ventas
-    fields = ('venta','detalle')
-    template_name = 'ingreso_venta.html'
-    success_url = '/WebFinal/exito_venta/'
+#     model = Ventas
+#     fields = ('venta','detalle')
+#     template_name = 'nueva_venta.html'
+#     success_url = '/WebFinal/exito_venta/'
 
 class BuscaClienteVenta(LoginRequiredMixin, ListView):
     model = Cliente
@@ -466,7 +465,37 @@ class BuscaClienteVenta(LoginRequiredMixin, ListView):
         if query=="":
             response = 'Cliente no encontrado'
             HttpResponseRedirect('/WebFinal/inicio2', {'response':response})
-        else:    
-            object_list = Cliente.objects.filter(Q(dni__icontains=query))       
+        else:
+
+            object_list = Cliente.objects.filter(Q(dni__icontains=query))
+            print(object_list)
             return (object_list)
+
+def ingreso_venta(request, pk):
+
+    cliente = Cliente.objects.get(pk=pk)
+
+    if request.method == 'POST':
+
+        form = Formulario_ventas(request.POST)
+
+        if form.is_valid():
+
+            datos = form.cleaned_data
+            venta = Ventas(cliente_id=pk,detalle=datos['detalle'])
+            venta.save()
+            venta.venta.set(datos['venta'])
+            venta.save()
+            return render(request, 'exito_venta.html', {'venta':venta})
+        
+        return render(request,'nueva_venta.html',{'form':form,'mensaje':"Formulario invalido.",'pk':pk,'cliente':cliente})
+    
+    else:
+        form = Formulario_ventas()
+        return render(request, 'nueva_venta.html',{'form':form,'pk':pk, 'cliente':cliente})
+
+        
+
+
+
 

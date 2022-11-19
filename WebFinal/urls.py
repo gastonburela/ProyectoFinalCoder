@@ -41,7 +41,7 @@ urlpatterns = [
     path('crear_proveedor/', CrearProveedor.as_view(), name='crear_proveedor'), 
     path('exito_proveedor/', proveedorcreado, name='proveedorcreado'),
     path('lista_proveedores/', ListaProveedores.as_view(), name='lista_proveedores'),
-    path('detalle_producto/<pk>',Detalle_Proveedor.as_view(),name='detalle_proveedor'),
+    path('detalle_proveedor/<pk>',Detalle_Proveedor.as_view(),name='detalle_proveedor'),
     path('borra_proveedor/<pk>', BorraProveedor.as_view(), name='borraproveedor'),
     path('proveedorupdate/<pk>', EditarProveedor.as_view(), name='proveedorupdate'),
     path('exito_update_proveedor/', proveedor_actualizado, name='proveedoractualizado'),
@@ -53,8 +53,8 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(template_name='logout.html'), name='Logout'),
 
     path('registro_ventas/', registro_ventas, name='registroventas'),
-    path('ingreso_venta/', Ingreso_venta.as_view(), name='ingresoventa'),
-    path('ingreso_venta/', BuscaClienteVenta.as_view(), name='buscarclienteventa'),
+    path('ingreso_venta/<pk>', ingreso_venta, name='nuevaventa'),
+    path('buscar_cliente_venta/', BuscaClienteVenta.as_view(), name='buscarclienteventa'),
     path('exito_venta/', exitoventas, name='exitoventa'),
 
 
