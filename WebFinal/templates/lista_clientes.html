@@ -4,12 +4,12 @@
 
 {% block secciones %}
 
-<button>
-<a href="{% url 'form_cliente' %}" >Crear Cliente</a>
-</button>
-<button>
-    <a href="{% url 'busqueda_cliente' %}" >Buscar Cliente</a>
-    </button>
+<a class="btn btn-success" href="{% url 'form_cliente' %}">Crear Cliente</a>
+
+
+<a class="btn btn-primary" href="{% url 'busqueda_cliente' %}">Buscar Cliente</a>
+
+    
     <h1> 
         
         Lista de Clientes: </h1>
@@ -25,12 +25,11 @@
             </a>
         </li>
         <div>
-            <button>
-                <a href="{% url 'borracliente' cliente.id %}">Eliminar</a>
-            </button>
-            <button>
-                <a href="{% url 'clienteupdate' cliente.id %}">Modificar</a>
-            </button>
+            <a class="btn btn-danger btn-sm" href="{% url 'borracliente' cliente.id %}">Eliminar</a>
+           
+            <a class="btn btn-secondary btn-sm" href="{% url 'clienteupdate' cliente.id %}">Modificar</a>
+
+        
         </div>
 
         {% endfor %}

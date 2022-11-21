@@ -6,10 +6,10 @@
         
 <form method="POST">{% csrf_token %}
 
-    <p>Seguro desea eliminar este Producto?</p>
-
-    <button type="submit">Confirmar</button>
-    <button><a href="{% url 'lista_proveedores' %}">Cancelar</a></button>
+    
+    <center><p>Seguro desea eliminar este Proveedor?</p>
+    <a class= "btn btn-success btn-sm type="submit">Confirmar</a>
+    <a class= "btn btn-secondary btn-sm" href="{% url 'lista_proveedores' %}">Cancelar</a>
 
 </form>
 

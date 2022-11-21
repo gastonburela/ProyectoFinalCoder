@@ -468,7 +468,7 @@ class BuscaClienteVenta(LoginRequiredMixin, ListView):
         else:
 
             object_list = Cliente.objects.filter(Q(dni__icontains=query))
-            print(object_list)
+        
             return (object_list)
 
 def ingreso_venta(request, pk):

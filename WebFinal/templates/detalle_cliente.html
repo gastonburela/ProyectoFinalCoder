@@ -6,15 +6,40 @@
 
 <h2>Detalle del cliente:</h2>
 
-<br>&nbsp;&nbsp;&nbsp;&nbsp;Nombre: {{cliente.nombre}}</br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp;Apellido: {{cliente.apellido}}</br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp;Dni: {{cliente.dni}}</br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp;Telefono: {{cliente.telefono}}</br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp;Direccion: {{cliente.direccion}}</br>
-
-<br>&nbsp;&nbsp;&nbsp;&nbsp;<button>
-    <a href="{% url 'lista_clientes'  %}" >Volver</a>
-</button>
+<div class="container">
+    <div class="row">
+      <div class="col-1">
+     <b>Nombre:</b> 
+      </div>
+      <div class="col-1">
+      {{cliente.nombre}}
+      </div>
+      <div class="row">
+        <div class="col-1">
+        <b>Apellido:</b> 
+        </div>
+        <div class="col-1">
+        {{cliente.apellido}}
+        </div>
+        <div class="row">
+            <div class="col-1">
+            <b>Telefono:</b> 
+            </div>
+            <div class="col-1">
+            {{cliente.telefono}}
+            </div>
+            <div class="row">
+              <div class="col-1">
+                <b>Direccion:</b>
+              </div>
+              <div class="col-5">
+              &nbsp;{{cliente.direccion}}
+              </div>        
+  </div>
+</div>
+<div>
+</br><a class="btn btn-primary btn-sm" href="{% url 'lista_clientes'  %}" >Volver</a>
+</div>
 
 
 {% endblock %}

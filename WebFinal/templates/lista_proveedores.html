@@ -4,15 +4,13 @@
 
 {% block secciones %}
 
-<button>
-<a href="{% url 'crear_proveedor' %}" >Dar de Alta Nuevo Proveedor</a>
-</button>
-<button>
-    <a href="{% url 'busqueda_proveedor' %}" >Buscar Proveedor</a>
-    </button>
+<a class="btn btn-info"href="{% url 'crear_proveedor' %}">Alta Nuevo Proveedor</a>
+
+    <a class= "btn btn-warning" href="{% url 'busqueda_proveedor' %}" >Buscar Proveedor</a>
+
     <h1> 
         
-        Productos Disponibles: </h1>
+        Lista de Proveedores: </h1>
 
     <ul>
 
@@ -25,12 +23,11 @@
             </a>
         </li>
         <div>
-            <button>
-                <a href="{% url 'borraproveedor' proveedor.id %}">Eliminar</a>
-            </button>
-            <button>
-                <a href="{% url 'proveedorupdate' proveedor.id %}">Modificar</a>
-            </button>
+        
+                <a class="btn btn-danger" href="{% url 'borraproveedor' proveedor.id %}">Eliminar</a>
+
+                <a class= "btn btn-light" href="{% url 'proveedorupdate' proveedor.id %}">Modificar</a>
+            
         </div>
 
         {% endfor %}

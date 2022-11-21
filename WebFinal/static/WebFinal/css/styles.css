@@ -5949,7 +5949,7 @@ textarea.form-control-lg {
   width: 1rem;
   margin-left: -0.5rem;
   content: "";
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 2px solid #f0f0f0;
 }
 
 .bs-popover-start > .popover-arrow, .bs-popover-auto[data-popper-placement^=left] > .popover-arrow {

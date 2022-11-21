@@ -5,12 +5,10 @@
 {% block secciones %}
 
 {% if user.is_authenticated %}
-<button>
-<a href="{% url 'crear_producto' %}" >Dar de Alta Nuevo Producto</a>
-</button>
-<button>
-    <a href="{% url 'busqueda_producto' %}" >Buscar Producto</a>
-    </button>
+
+<a class= "btn btn-success" href="{% url 'crear_producto' %}" > Alta Nuevo Producto</a>
+<a class= "btn btn-secondary" href="{% url 'busqueda_producto' %}" >Buscar Producto</a>
+
 {% endif %}
     <h1> 
         
@@ -28,12 +26,11 @@
         </li>
         <div>
             {% if user.is_authenticated %}
-            <button>
-                <a href="{% url 'borraproducto' producto.id %}">Eliminar</a>
-            </button>
-            <button>
-                <a href="{% url 'productoupdate' producto.id %}">Modificar</a>
-            </button>
+                <a class= "btn btn-danger"href="{% url 'borraproducto' producto.id %}">Eliminar</a>
+            
+        
+                <a class= "btn btn-warning" href="{% url 'productoupdate' producto.id %}">Modificar</a>
+            
             {% endif %}
         </div>
 

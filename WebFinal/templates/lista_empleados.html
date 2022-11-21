@@ -4,12 +4,11 @@
 
 {% block secciones %}
 
-<button>
-<a href="{% url 'crea_empleado' %}" >Dar de Alta Nuevo Empleado</a>
-</button>
-<button>
-    <a href="{% url 'busqueda_empleado' %}" >Buscar Empleado</a>
-    </button>
+ 
+
+    <a class="btn btn-primary" href="{% url 'crea_empleado' %}" >Alta Nuevo Empleado</a>
+    <a class= "btn btn-dark" href="{% url 'busqueda_empleado' %}" >Buscar Empleado</a>
+    
     <h1> 
         
         Lista de Empleados Activos: </h1>
@@ -25,11 +24,10 @@
             </a>
         </li>
         <div>
-            <button>
-                <a href="{% url 'borraempleado' empleado.id %}">Eliminar</a>
-            </button>
-            <button>
-                <a href="{% url 'empleadoupdate' empleado.id %}">Modificar</a>
+        
+            <a class= "btn btn-danger btn-sm" href="{% url 'borraempleado' empleado.id %}">Eliminar</a>
+            
+                <a class= "btn btn-secondary btn-sm" href="{% url 'empleadoupdate' empleado.id %}">Modificar</a>
             </button>
         </div>
 
