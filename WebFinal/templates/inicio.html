@@ -37,6 +37,7 @@
                         
                         {% endif %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'lista_productos' %}">Productos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'contactenos' %}">Contactenos</a></li>
                         
                         {% if user.is_authenticated %}
                             <h4 style="color: white;">&nbsp;&nbsp;&nbsp;&nbsp;Usuario:&nbsp;&nbsp;{{user.username}}&nbsp;&nbsp;&nbsp;&nbsp;</h4>                               

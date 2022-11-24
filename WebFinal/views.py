@@ -18,6 +18,9 @@ from django.core.exceptions import FieldError
 from django.db import DEFAULT_DB_ALIAS, DatabaseError
 from django.db.models.constants import LOOKUP_SEP
 
+from django.core.mail import send_mail
+from django.conf import settings
+
 from django.utils import tree
 from WebFinal.forms import Formulario_cliente
 from WebFinal.models import *
@@ -495,7 +498,20 @@ def ingreso_venta(request, pk):
         return render(request, 'nueva_venta.html',{'form':form,'pk':pk, 'cliente':cliente})
 
         
+def form_contacto(request):
 
+    if request.method == 'POST':
+
+        asunto = request.POST['asunto']
+        mensaje = request.POST['mensaje'] + request.POST['email']
+        email_from = settings.EMAIL_HOST_USER
+        destinatario = ['consultas_gattone@smallproyecciones.com.ar']
+
+        send_mail(asunto, mensaje, email_from, destinatario)
+
+        return render(request, 'exito_contacto.html')
+    
+    return render(request, 'formulario_contacto.html')
 
 
 
