@@ -1,6 +1,6 @@
 from django.db import models
 from unittest.util import _MAX_LENGTH
-
+from django.contrib.auth.models import User
 
 # Create your models here.  
 
@@ -48,3 +48,11 @@ class Ventas(models.Model):
     venta = models.ManyToManyField(Productos)
     fecha = models.DateField(auto_now=True)
     detalle = models.TextField(max_length=254)
+
+#Avatares
+class Avatar(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to='avatares', null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.user} - {self.imagen}'

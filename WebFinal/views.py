@@ -31,7 +31,9 @@ class StaffRequiredMixin(object):
 
 def inicio(request):
 
-    return render(request, 'inicio2.html')
+    avatar = Avatar.objects.get(user=request.user)
+
+    return render(request, 'inicio2.html', {'url': avatar.imagen.url})
 
 # def form_cliente(request):
 
